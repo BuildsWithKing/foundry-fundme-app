@@ -12,7 +12,7 @@ contract DeployFundMe is Script {
         //It is used to deploy the contract to the network
         //Before startBroadcast --> Not a "real" transaction
         HelperConfig helperConfig = new HelperConfig(); //Creating a new instance of the HelperConfig contract
-        (address ethUsdPriceFeed) = helperConfig.activeNetworkConfig();
+        address ethUsdPriceFeed = helperConfig.activeNetworkConfig();
         vm.startBroadcast(); // starting the broadcast of the transaction
         //After startBroadcast --> A "real" transaction
         //This is the function that runs when the script is executed
