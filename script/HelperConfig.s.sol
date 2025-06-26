@@ -41,9 +41,7 @@ contract HelperConfig is Script {
         //This function returns the configuration for the Sepolia network
         //It is used to get the price feed address and the deployer address for the Sepolia network
         //price feed address:
-        NetworkConfig memory sepoliaConfig = NetworkConfig({
-            priceFeed: 0x694AA1769357215DE4FAC081bf1f309aDC325306
-        });
+        NetworkConfig memory sepoliaConfig = NetworkConfig({priceFeed: 0x694AA1769357215DE4FAC081bf1f309aDC325306});
         return sepoliaConfig;
     }
 
@@ -51,9 +49,7 @@ contract HelperConfig is Script {
         //This function returns the configuration for the Ethereum Mainnet network
         //It is used to get the price feed address and the deployer address for the Ethereum Main network
         //price feed address:
-        NetworkConfig memory ethMainnetConfig = NetworkConfig({
-            priceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
-        });
+        NetworkConfig memory ethMainnetConfig = NetworkConfig({priceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419});
         return ethMainnetConfig;
     }
 
@@ -70,16 +66,12 @@ contract HelperConfig is Script {
         //2. Returns the mock addresses
 
         vm.startBroadcast(); //Starting the broadcast of the transaction and Creating a new instance of the MockV3Aggregator contract
-        MockV3Aggregator mockPriceFeed = new MockV3Aggregator(
-            DECIMALS,
-            INITIAL_PRICE
-        ); //8 decimals, initial price of 2000 USD
+        MockV3Aggregator mockPriceFeed = new MockV3Aggregator(DECIMALS, INITIAL_PRICE); //8 decimals, initial price of 2000 USD
 
         vm.stopBroadcast();
 
-        NetworkConfig memory anvilConfig = NetworkConfig({
-            priceFeed: address(mockPriceFeed)
-        });
+        NetworkConfig memory anvilConfig = NetworkConfig({priceFeed: address(mockPriceFeed)});
+        activeNetworkConfig = anvilConfig;
         return anvilConfig;
     }
 }

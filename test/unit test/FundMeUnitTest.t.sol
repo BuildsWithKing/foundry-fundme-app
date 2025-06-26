@@ -90,10 +90,7 @@ contract FundMeUnitTest is Test {
         uint256 endingOwnerBalance = fundMe.getOwner().balance; //This gets the ending balance of the Contract owner
         uint256 endingFundMeBalance = address(fundMe).balance; //This gets the ending balance of the FundMe contract
         assertEq(endingFundMeBalance, 0); //This checks that the ending balance of the FundMe contract is 0
-        assertEq(
-            startingOwnerBalance + startingFundMeBalance,
-            endingOwnerBalance
-        ); //This checks that the ending balance of the Contract owner is equal to the starting balance plus the starting balance of the FundMe contract
+        assertEq(startingOwnerBalance + startingFundMeBalance, endingOwnerBalance); //This checks that the ending balance of the Contract owner is equal to the starting balance plus the starting balance of the FundMe contract
     }
 
     function test_WithdrawFromMultipleFunders() public funded {
@@ -107,7 +104,7 @@ contract FundMeUnitTest is Test {
             //fund the fundMe contract
             hoax(address(i), ETH_AMOUNT); // Creates a blank address of i, which starts with 1 and adds ETH_AMOUNT to it
             fundMe.fund{value: ETH_AMOUNT}(); //This sends 0.1 ETH to the fund function from the new addresses
-            // The many funders loops through the addresses from 1 to 10, and funds the contract with 0.1 ETH each time
+                // The many funders loops through the addresses from 1 to 10, and funds the contract with 0.1 ETH each time
         }
         //Act phase
         //This is the act phase where we call the withdraw function
@@ -120,10 +117,7 @@ contract FundMeUnitTest is Test {
         //Assert phase
         //This is the assert phase where we check the results of the test
         assert(address(fundMe).balance == 0); //This checks that the ending balance of the FundMe contract is 0
-        assert(
-            startingFundMeBalance + startingOwnerBalance ==
-                fundMe.getOwner().balance
-        ); //This checks that the ending balance of the Contract owner is equal to the starting balance plus the starting balance of the FundMe contract
+        assert(startingFundMeBalance + startingOwnerBalance == fundMe.getOwner().balance); //This checks that the ending balance of the Contract owner is equal to the starting balance plus the starting balance of the FundMe contract
     }
 
     function test_WithdrawCheaperFromMultipleFunders() public funded {
@@ -137,7 +131,7 @@ contract FundMeUnitTest is Test {
             //fund the fundMe contract
             hoax(address(i), ETH_AMOUNT); // Creates a blank address of i, which starts with 1 and adds ETH_AMOUNT to it
             fundMe.fund{value: ETH_AMOUNT}(); //This sends 0.1 ETH to the fund function from the new addresses
-            // The many funders loops through the addresses from 1 to 10, and funds the contract with 0.1 ETH each time
+                // The many funders loops through the addresses from 1 to 10, and funds the contract with 0.1 ETH each time
         }
         //Act phase
         //This is the act phase where we call the withdraw function
@@ -150,10 +144,7 @@ contract FundMeUnitTest is Test {
         //Assert phase
         //This is the assert phase where we check the results of the test
         assertEq(address(fundMe).balance, 0); //This checks that the ending balance of the FundMe contract is 0
-        assertEq(
-            startingFundMeBalance + startingOwnerBalance,
-            fundMe.getOwner().balance
-        ); //This checks that the ending balance of the Contract owner is equal to the starting balance plus the starting balance of the FundMe contract
+        assertEq(startingFundMeBalance + startingOwnerBalance, fundMe.getOwner().balance); //This checks that the ending balance of the Contract owner is equal to the starting balance plus the starting balance of the FundMe contract
     }
 
     function test_UserCanFundMultipleTimes() public funded {
